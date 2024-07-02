@@ -22,7 +22,7 @@ before_action :set_task, only: [:edit,:update,:show, :destroy]
   end
 
   def update
-
+    redirect_to index_task_path
     @task.update(task_params)
   end
 
