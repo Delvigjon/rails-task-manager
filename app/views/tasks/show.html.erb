@@ -1,0 +1,14 @@
+<!-- app/views/tasks/show.html.erb -->
+<h1><%= @task.title %></h1>
+<p><%= @task.details %></p>
+
+<%= form_with(model: @task, local: true) do |form| %>
+  <%= form.check_box :completed %>
+  <% if @task.completed %>
+    Completed
+  <% else %>
+    Not Completed
+  <% end %>
+<% end %>
+<%= link_to 'edit',edit_task_path %>
+<%= link_to 'Back', tasks_path %>
