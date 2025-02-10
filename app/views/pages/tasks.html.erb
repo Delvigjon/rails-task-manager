@@ -1,0 +1,70 @@
+<div class="mt-5">
+  <h3 class="mb-3">Tâches à effectuer</h3>
+  <div class="list-group shadow-sm">
+    <% Task.where(completed: false).each do |task| %>
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <i class="fas fa-tasks text-primary me-2"></i>
+          <strong><%= task.title %></strong>
+          <p class="text-muted mb-0"><%= task.details %></p>
+        </div>
+        <div class="d-flex gap-2">
+          <!-- Marquer comme soldé -->
+          <%= link_to task_path(task, task: { completed: true }), method: :patch,
+                      class: "btn btn-success btn-sm d-flex align-items-center",
+                      title: "Marquer comme terminé" do %>
+            <i class="fas fa-check-circle"></i> Terminer
+          <% end %>
+
+          <!-- Modifier -->
+          <%= link_to edit_task_path(task),
+                      class: "btn btn-warning btn-sm d-flex align-items-center",
+                      title: "Modifier" do %>
+            <i class="fas fa-pen"></i> Modifier
+          <% end %>
+
+          <!-- Supprimer avec SweetAlert -->
+          <%= link_to task_path(task), method: :delete,
+                      class: "btn btn-danger btn-sm d-flex align-items-center btn-delete-task",
+                      data: { id: task.id }, title: "Supprimer" do %>
+            <i class="fas fa-trash"></i> Supprimer
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- ✅ Section des tâches soldées -->
+<div class="mt-5">
+  <h3 class="mb-3 text-success">Tâches Soldées</h3>
+  <div class="list-group shadow-sm">
+    <% Task.where(completed: true).each do |task| %>
+      <div class="list-group-item d-flex justify-content-between align-items-center bg-light">
+        <div>
+          <i class="fas fa-check text-success me-2"></i>
+          <del><strong><%= task.title %></strong></del>
+          <p class="text-muted mb-0"><%= task.details %></p>
+        </div>
+        <div class="d-flex gap-2">
+          <!-- Annuler la complétion -->
+          <%= link_to task_path(task, task: { completed: false }), method: :patch,
+                      class: "btn btn-secondary btn-sm d-flex align-items-center",
+                      title: "Annuler la complétion" do %>
+            <i class="fas fa-undo"></i> Reprendre
+          <% end %>
+
+          <!-- Supprimer -->
+          <%= link_to task_path(task), method: :delete,
+                      class: "btn btn-danger btn-sm d-flex align-items-center btn-delete-task",
+                      data: { id: task.id }, title: "Supprimer" do %>
+            <i class="fas fa-trash"></i> Supprimer
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"
+        integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMMjbK5VqME1pJHaml5qPTVkC3u+OIF5T7nR2pJ"
+        crossorigin="anonymous"></script>

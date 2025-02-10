@@ -13,3 +13,32 @@
  *= require_tree .
  *= require_self
  */
+ .container {
+  max-width: 700px;
+}
+
+.list-group-item {
+  transition: background 0.2s ease-in-out;
+  border-radius: 8px;
+}
+
+.list-group-item:hover {
+  background: #f8f9fa;
+}
+
+.text-success {
+  font-weight: bold;
+}
+
+del {
+  color: #6c757d;
+}
+
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 14px;
+}

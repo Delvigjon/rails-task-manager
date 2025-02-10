@@ -1,24 +1,51 @@
 <div class="container w-50">
+  <h1 class="my-4 text-center">Mes Tâches</h1>
 
-  <h1 class="my-4">My Tasks</h1>
-
-  <div class="list-group ">
+  <div class="list-group shadow-sm">
     <% @tasks.each do |task| %>
       <div class="list-group-item d-flex justify-content-between align-items-center">
         <div>
           <%= check_box_tag "task_#{task.id}", task.id, task.completed, disabled: true, class: 'me-2' %>
-          <%= link_to task.title, task_path(task), class: 'text-decoration-none' %>
+          <%= link_to task.title, task_path(task), class: 'text-decoration-none fw-bold' %>
         </div>
         <div>
-          <%= link_to 'Add', new_task_path, class: 'btn btn-success btn-sm' %>
-          <%= link_to 'Edit', edit_task_path(task), class: 'btn btn-primary btn-sm ' %>
-          <%= link_to 'Delete', task_path(task), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger btn-sm' %>
+          <%= link_to new_task_path, class: 'btn btn-success btn-sm', title: 'Ajouter une tâche' do %>
+            <i class="fas fa-plus"></i>
+          <% end %>
+          <%= link_to edit_task_path(task), class: 'btn btn-primary btn-sm', title: 'Modifier' do %>
+            <i class="fas fa-edit"></i>
+          <% end %>
+          <%= link_to task_path(task), data: { turbo_method: :delete, turbo_confirm: "Es-tu sûr de vouloir supprimer cette tâche ?" }, class: 'btn btn-danger btn-sm', title: 'Supprimer' do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
         </div>
       </div>
     <% end %>
   </div>
-
-<div class="my-4">
-
 </div>
-</div>
+<style>
+.container {
+  max-width: 600px;
+}
+
+.list-group-item {
+  transition: background 0.2s ease-in-out;
+}
+
+.list-group-item:hover {
+  background: #f8f9fa;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+}
+
+.btn i {
+  font-size: 14px;
+}
+</style>
